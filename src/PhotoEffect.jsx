@@ -3,8 +3,8 @@ import "./index.css";
 
 import forest from "./test_assets/forest.webp";
 
-const RADIUS=100;
-const POINTS=30;
+const RADIUS=90;
+const POINTS=20;
 
 function PhotoEffect({ width=500, height=800 }) {
   const canvasRef = useRef(null);
@@ -19,28 +19,30 @@ function PhotoEffect({ width=500, height=800 }) {
     const mouse = {
       x: 0,
       y: 0,
+      vx: 0,
+      vy: 0,
       inside: false,
     }
 
     // Generate Random Points To Form A Random Blob
     const points = []; // array of random points  
 
-    for(let i=0; i<POINTS; i++) {
-      const angle = (Math.PI * 2 * i) / POINTS;
+    const genPoints = () => {
+      for (let i = 0; i < POINTS; i++) {
+        const angle = (Math.PI * 2 * i) / POINTS;
 
-      const randomRadius = RADIUS * (0.69 + Math.random() * 0.7);
+        points.push({
+          angle,
+          radius: RADIUS * (0.69 + Math.random() * 0.7),
+          targetRadius: RADIUS * (0.69 + Math.random() * 0.1),
+          velocity: 0,
+        });
+      }
+    };
 
-      // sin and cos makes a circle
-      const x = Math.cos(angle) * randomRadius;
-      const y = Math.sin(angle) * randomRadius;
-
-      points.push({x, y});
-    }
-
+    genPoints();
 
     const resize = () => {
-      // canvas.width = window.innerWidth;
-      // canvas.height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
     };
@@ -49,8 +51,15 @@ function PhotoEffect({ width=500, height=800 }) {
       // get canvas coordinate
       const rect = canvas.getBoundingClientRect(); 
 
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      mouse.vx = x - mouse.x;
+      mouse.vy = y - mouse.y;
+
+      mouse.x = x;
+      mouse.y = y;
+
       mouse.inside = true;
     };
 
@@ -61,8 +70,8 @@ function PhotoEffect({ width=500, height=800 }) {
     const draw = () => {
       // clear previous canvas
       ctx.clearRect(
-        -100,
-        -100,
+        0,
+        0,
         canvas.width,
         canvas.height
       );
@@ -83,31 +92,66 @@ function PhotoEffect({ width=500, height=800 }) {
       ctx.beginPath();
       // ctx.arc(mouse.x, mouse.y, RADIUS, 0, Math.PI * 2);
 
-      for (let i=0; i<points.length; i++) {
+      for (const point of points) {
+        if (Math.random() < 0.02) {
+          point.targetRadius =
+            RADIUS * (0.69 + Math.random() * 0.4);
+        }
+
+        // interpolate thing
+        const deformForce = 
+          (point.targetRadius - point.radius) * 0.07;
+
+        // get mouse velocity dir
+        const dirX = Math.cos(point.angle);
+        const dirY = Math.sin(point.angle);
+
+        // calc velocity force
+        const velocityForce = 
+          mouse.vx * dirX + mouse.vy * dirY;
+
+        // combine
+        point.velocity += deformForce;
+        point.velocity += velocityForce * 0.063;
+
+        // damping: slow the deformation
+        point.velocity *= 0.87;
+
+        // apply velocity
+        point.radius += point.velocity;
+      }
+
+      for (let i = 0; i < points.length; i++) {
         const current = points[i];
         const next = points[(i + 1) % points.length];
 
         // move points relative to cursor
-        const currentX = mouse.x + current.x;
-        const currentY = mouse.y + current.y;
+        const currentX =
+          mouse.x + Math.cos(current.angle) * current.radius;
 
-        const nextX = mouse.x + next.x;
-        const nextY = mouse.y + next.y;
+        const currentY =
+          mouse.y + Math.sin(current.angle) * current.radius;
+
+        const nextX =
+          mouse.x + Math.cos(next.angle) * next.radius;
+
+        const nextY =
+          mouse.y + Math.sin(next.angle) * next.radius;
 
         // midpoint
         const midX = (currentX + nextX) / 2;
         const midY = (currentY + nextY) / 2;
 
         // sets the starting point
-        if (i===0) {
+        if (i === 0) {
           ctx.moveTo(midX, midY);
         }
-        
+
         // current: control point, mid: where the curve ends
         ctx.quadraticCurveTo(
           currentX,
           currentY,
-          midX, 
+          midX,
           midY
         );
       }
@@ -158,12 +202,11 @@ function PhotoEffect({ width=500, height=800 }) {
 
   return (
     <>
-    {/* <img src={forest} /> */}
     <canvas
     ref={canvasRef}
     width={width}
     height={height}
-    className="block"
+    className="block cursor-none"
     />
     </>
   );
