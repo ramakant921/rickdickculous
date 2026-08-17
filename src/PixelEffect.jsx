@@ -134,7 +134,7 @@ function PixelEffect() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 h-screen w-screen pointer-events-none -z-10"
+      className="fixed inset-0 h-screen w-screen pointer-events-none z-69"
     />
   );
 }
