@@ -7,7 +7,7 @@ import About from "./About";
 function App() {
   return (
     <>
-  <PixelEffect />
+    <PixelEffect />
     <Hero />
     {/* <About /> */}
     {/* <div className="h-screen grid place-content-center"> */}

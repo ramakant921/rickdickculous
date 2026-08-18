@@ -20,33 +20,22 @@ body {
   color: var(--hint);
 }
 
-.logo {
-  width: 300px;
-  height: 32px;
-  background: white;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  clip-path: polygon(
-  0 0,
-  100% 0,
-  100% 35%,
-  82% 35%,
-  77% 100%,
-  23% 100%,
-  18% 35%,
-  0 35%
-  );
-}
-
-.logo span {
-  color: #ff3434;
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .smoothIt {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease-out;
+}
+
+@keyframes scrollDot {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(-2.35rem);
+    opacity: 0.6;
+  }
+}
+
+.scrollDot {
+  animation: scrollDot 3s ease-in-out infinite;
 }
