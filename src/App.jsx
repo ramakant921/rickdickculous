@@ -10,6 +10,7 @@ function App() {
     <PixelEffect />
     <Hero />
     <About />
+
     {/* <div className="h-screen grid place-content-center"> */}
     {/* <PhotoEffect  */}
     {/* width={400} */}

@@ -6,7 +6,7 @@ import forest from "./test_assets/forest.webp";
 const RADIUS=90;
 const POINTS=20;
 
-function PhotoEffect({ width=500, height=800 }) {
+function PhotoEffect({ width=500, height=800, classname}) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -206,7 +206,7 @@ function PhotoEffect({ width=500, height=800 }) {
     ref={canvasRef}
     width={width}
     height={height}
-    className="block cursor-none"
+    className={`block cursor-none ${classname}`}
     />
     </>
   );

@@ -38,7 +38,7 @@ function Hero() {
 
   return (
     <>
-    <section id="hero">
+    <section id="hero" className="h-screen">
     {/* tab thing */}
     <svg className="mx-auto w-[40%]" viewBox="0 0 984 63" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M413.147 53.9377L392.025 4.93771C387.757 -4.96383 395.017 -16 405.8 -16H578.199C588.982 -16 596.242 -4.96381 591.974 4.93773L570.852 53.9377C568.481 59.4375 563.066 63 557.077 63H426.921C420.932 63 415.517 59.4375 413.147 53.9377Z" fill="white"/>
@@ -74,7 +74,7 @@ function Hero() {
     />
   
   {/* Scroll Indicator */}
-  <div className="absolute bottom-[8%] left-[50%] flex flex-col items-center">
+  <div className="absolute bottom-[8%] left-[50%] -translate-x-1/2 flex flex-col items-center">
   <svg className="w-9 mb-2" viewBox="0 0 47 88" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect x="3" y="3" width="41" height="82" rx="20.5" stroke="white" stroke-width="6"/>
   <circle className="scrollDot" cx="24" cy="63" r="9" fill="#FF3C3C"/>
