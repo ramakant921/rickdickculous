@@ -1,39 +1,65 @@
 import "./index.css";
-import crack from './assets/crack.png';
+import divider from './assets/divider.png';
+import dummy from './assets/pic.webp';
 
 function About() {
   return (
     <>
-    <section className="relative flex flex-col pb-40 px-40 min-h-screen overflow-hidden">
+    <section className="relative h-screen px-16 pb-12">
     
-    <h1 className="text-center text-[7rem] font-bold tracking-wide text-(--hint)">
+    <h1 className="text-[10rem] font-bold tracking-widest">
     ABOUT US
     </h1>
 
-    <div className="w-[60%] mt-8 ml-[30%]">
-    <div className="flex justify-between text-[4rem] tracking-[0.25rem] font-bold text-slate-00">
-    <h1>ZALOS</h1>
-    <h2>SPODORMON</h2>
+    <div className="flex w-full justify-between">
+
+    {/* LEFT */}
+    <div className="mt-[11rem] w-[36%]">
+    <div className="flex relative gap-6">
+    <img src={dummy}
+    className="pointer-events-none select-none
+    max-w-[52%] h-auto scale-x-[-1]"
+    />
+    <p className="text-[1.6rem] -mt-2">
+    this is some dummy description i don't know what i am write
+    tis is bus taaeuhtn what ever you know rickdickculous.
+    </p>
+    <p className="text-[5rem] font-bold tracking-widest
+    absolute bottom-0 left-[31%] leading-none mix-blend-difference"
+    >
+    ZALOS
+    </p>
+    </div>
     </div>
 
-    <p className="text-[2rem] mt-8 font-semibold leading-[1.35] tracking-[0.12em] text-slate-1">We developers who enjoys turning ideas into real world projects.
-    We are passionate about web developer, open source software and learning technologies.
+    {/* RIGHT */}
+    <div className="relative -mt-[11rem] w-[36%]">
+    <img src={dummy}
+    className="pointer-events-none select-none
+    max-w-[52%] h-auto ml-auto"
+    />
+
+    <p className="mt-4 ml-auto max-w-[60%] text-[1.5rem] text-right">
+    this is some dummy description i don't know what i am write
+    tis is bus taaeuhtn what ever you know rickdickculous.
+    </p>
+    <p className="text-[5rem] max-w-[1rem] font-bold tracking-widest
+    absolute top-0 right-[69%] mix-blend-difference"
+    >
+      {"SPODOR\nMON"}
     </p>
     </div>
 
-    <p className="mt-auto w-[45%] text-[2rem] font-semibold leading-[1.35] tracking-[0.12em] text-slate-1">
-    We mainly work on React,JS,Linux.
-    We love experimenting about different tools to improve skills
-    </p>
+    </div>
 
-    <img src={crack} alt="" className="pointer-events-none 
-    absolute 
-    bottom-[-1px]
-    z-22 w-[-800px] 
-    select-none"/>
+    <img src={divider}
+    className="absolute top-0 left-[50%] -translate-x-[40%]
+    h-screen"
+    />
     </section>
     </>
   );
 }
 
 export default About;
+

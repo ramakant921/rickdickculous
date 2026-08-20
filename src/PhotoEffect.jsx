@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import "./index.css";
 
-import forest from "./test_assets/forest.webp";
+import forest from "./assets/pic.webp";
 
 const RADIUS=90;
 const POINTS=20;
