@@ -1,4 +1,3 @@
-import "./index.css";
 import { useEffect, useRef } from "react";
 import rock1 from "./assets/rock1.png"
 import rock2 from "./assets/rock2.png"

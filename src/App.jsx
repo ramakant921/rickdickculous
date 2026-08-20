@@ -5,6 +5,7 @@ import Hero from "./Hero";
 import About from "./About";
 import Zbout from "./Zbout";
 import Skills from "./Skills";
+import Projects from "./Projects";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     <Zbout />
     <About />
     <Skills />
+    <Projects />
 
     {/* <div className="h-screen grid place-content-center"> */}
     {/* <PhotoEffect  */}

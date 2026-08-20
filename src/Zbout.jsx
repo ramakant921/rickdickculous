@@ -1,4 +1,3 @@
-import "./index.css";
 import divider from './assets/divider.png';
 import dummy from './assets/pic.webp';
 

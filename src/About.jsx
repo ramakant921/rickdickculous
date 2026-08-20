@@ -1,4 +1,3 @@
-import "./index.css";
 import crack from './assets/crack.png';
 
 function About() {
