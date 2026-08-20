@@ -3,15 +3,17 @@ import PixelEffect from "./PixelEffect";
 import PhotoEffect from "./PhotoEffect";
 import Hero from "./Hero";
 import About from "./About";
+import Zbout from "./About";
 import Skills from "./Skills";
 
 function App() {
   return (
     <>
     <PixelEffect />
-    <Hero />
-    <About />
-    <Skills />
+    {/* <Hero /> */}
+    {/* <About /> */}
+    <Zbout />
+    {/* <Skills /> */}
 
     {/* <div className="h-screen grid place-content-center"> */}
     {/* <PhotoEffect  */}

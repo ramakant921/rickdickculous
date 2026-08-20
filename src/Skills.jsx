@@ -1,8 +1,7 @@
-import React from "react";
-
 function Skills() {
   return (
     <>
+    <section className="relative h-screen">
       <h1 className="absolute left-1/2 top-0 z-10 -translate-x-1/2 text-[80px] font-black tracking-tight sm:text-[110px] md:text-[150px] lg:text-[180px]">
         SKILLS
       </h1>
@@ -57,6 +56,7 @@ function Skills() {
           LINUX
         </p>
       </div>
+    </section>
 
     </>
   )
