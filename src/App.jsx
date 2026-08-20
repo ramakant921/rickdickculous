@@ -3,6 +3,7 @@ import PixelEffect from "./PixelEffect";
 import PhotoEffect from "./PhotoEffect";
 import Hero from "./Hero";
 import About from "./About";
+import Skills from "./Skills";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
     <PixelEffect />
     <Hero />
     <About />
+    <Skills />
 
     {/* <div className="h-screen grid place-content-center"> */}
     {/* <PhotoEffect  */}
