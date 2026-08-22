@@ -6,17 +6,19 @@ import About from "./About";
 import Zbout from "./Zbout";
 import Skills from "./Skills";
 import Projects from "./Projects";
+import Stars from "./Stars";
 
 function App() {
   return (
     <>
     <PixelEffect />
+    <Stars />
     <Hero />
     <Zbout />
-    {/* <About /> */}
     <Skills />
     <Projects />
 
+    {/* <About /> */}
     {/* <div className="h-screen grid place-content-center"> */}
     {/* <PhotoEffect  */}
     {/* width={400} */}
