@@ -13,7 +13,7 @@ function App() {
     <PixelEffect />
     <Hero />
     <Zbout />
-    <About />
+    {/* <About /> */}
     <Skills />
     <Projects />
 

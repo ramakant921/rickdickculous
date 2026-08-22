@@ -1,8 +1,4 @@
 import { useEffect, useRef } from "react";
-import * as THREE from "three";
-import moonColor from "./assets/moon/moon-color.jpg";
-import moonNormal from "./assets/moon/moon-normal.jpg";
-import moonRoughness from "./assets/moon/moon-roughness.jpg";
 
 import rock1 from "./assets/rock1.png"
 import rock2 from "./assets/rock2.png"
@@ -12,119 +8,6 @@ function Hero() {
   const titleRef = useRef(null);
   const rock1Ref = useRef(null);
   const rock2Ref = useRef(null);
-
-  // 3d Scene
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-
-    const scene = new THREE.Scene();
-
-    const camera = new THREE.PerspectiveCamera(
-      60, // fov
-      window.innerWidth / window.innerHeight, // aspect ratio
-      0.1, // camera near plane (at what distance graphics starts to render)
-      100 // camera far plane (how far we can view)
-    );
-
-    camera.position.z = 5;
-
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      powerPreference: "high-performance",
-    });
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    // Scale render to minimise gpu usage
-    renderer.setPixelRatio(
-      Math.min(window.devicePixelRatio, 2)
-    );
-
-    // Texture
-
-    const loader = new THREE.TextureLoader();
-
-    const color = loader.load(moonColor);
-    const normal = loader.load(moonNormal);
-    const roughness = loader.load(moonRoughness);
-
-    // Moon
-    const geometry = new THREE.SphereGeometry(2, 15, 15);
-
-    const material = new THREE.MeshBasicMaterial({
-      map: color,
-      normalMap: normal,
-      roughnessMap: roughness,
-      roughness: 1,
-    });
-
-    const moon = new THREE.Mesh(
-      geometry,
-      material
-    );
-
-    scene.add(moon);
-
-    // Light
-    const light = new THREE.DirectionalLight(
-      0xffffff,
-      1.2
-    );
-
-    light.position.set(5, 3, 5);
-    scene.add(light);
-
-    const ambient = new THREE.AmbientLight(
-      0xffffff,
-      0.1
-    );
-    scene.add(ambient);
-
-    const planet = new THREE.Mesh(geometry, material);
-    
-    scene.add(planet);
-
-    // Animation
-    const clock = new THREE.Clock();
-
-    function animate() {
-      const delta = clock.getDelta();
-
-      planet.rotation.y += delta * 0.2;
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    // resize
-    function handleResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-
-      renderer.setSize(
-        window.innerWidth,
-        window.innerHeight
-      );
-    }
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-
-      geometry.dispose();
-      material.dispose();
-
-      color.dispose();
-      normal.dispose();
-      roughness.dispose();
-      renderer.dispose();
-    }
-  }, []);
 
   const mouse = {
     x: 0,
@@ -139,11 +22,11 @@ function Hero() {
 
       // move
       rock1Ref.current.style.transform =
-        `translate(${mouse.x * 0.05}px, ${mouse.y *0.05}px)`;
+        `translate(${mouse.x * 0.07}px, ${mouse.y *0.07}px)`;
       rock2Ref.current.style.transform =
-        `translate(${mouse.x * 0.02}px, ${mouse.y *0.02}px)`;
+        `translate(${mouse.x * 0.04}px, ${mouse.y *0.04}px)`;
       titleRef.current.style.transform =
-        `translate(${mouse.x * 0.01}px, ${mouse.y *0.01}px)`;
+        `translate(${mouse.x * 0.03}px, ${mouse.y *0.03}px)`;
     }
 
     window.addEventListener("mousemove", handleMouse);
@@ -156,8 +39,6 @@ function Hero() {
   return (
     <>
     <section id="hero" className="relative h-screen overflow-hidden">
-    <canvas ref={canvasRef}
-    className="-z-10 absolute"/>;
     {/* tab thing */}
     <svg className="mx-auto w-[40%]" viewBox="0 0 984 63" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M413.147 53.9377L392.025 4.93771C387.757 -4.96383 395.017 -16 405.8 -16H578.199C588.982 -16 596.242 -4.96381 591.974 4.93773L570.852 53.9377C568.481 59.4375 563.066 63 557.077 63H426.921C420.932 63 415.517 59.4375 413.147 53.9377Z" fill="white"/>
@@ -171,9 +52,6 @@ function Hero() {
     <li>Contact</li>
     <li>About</li>
     </ul>
-
-
-    {/* <h1 ref={titleRef} className="smoothIt z-0 text-center text-[12vw] font-bold">PORTFOLIO</h1> */}
 
     <svg ref={titleRef} className="smoothIt w-full" viewBox="0 -20 300 90">
     {/* d(data): MoveHere x y QuadracticCurve controlX controlY(arch) endX endY */}
